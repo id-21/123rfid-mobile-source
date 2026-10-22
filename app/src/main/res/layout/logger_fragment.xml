@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_marginBottom="240dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_marginTop="10dp">
+        <ImageView
+            android:id="@+id/logger_image"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            app:srcCompat="@drawable/loggingicon"
+            android:layout_marginStart="12dp" />
+        <TextView
+            android:id="@+id/logger_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="14dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/Logger"
+            android:textSize="21sp"
+            android:textColor="#283747"
+            android:textStyle="bold" />
+</LinearLayout>
+        <TextView
+            android:id="@+id/applicationlogger_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="40dp"
+            android:text="@string/ApplicationLogger"
+            android:textColor="#283747"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <RelativeLayout
+            android:id="@+id/readerrelative_id"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp">
+            <TextView
+                android:id="@+id/enablelogger_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="@string/Enable"
+                android:textSize="16sp"
+                android:layout_marginStart="14dp"
+                android:textColor="#283747"
+                />
+
+            <Switch
+                android:id="@+id/enablelogger_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/enablelogger_textview"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="10dp"
+                tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+        </RelativeLayout>
+        <LinearLayout
+            android:id="@+id/logs_retrieval_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginStart="14dp"
+            android:visibility="gone"
+            >
+
+        <TextView
+            android:id="@+id/readerlogger_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textColor="#283747"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"
+            android:text="@string/reader" />
+
+            <TableRow
+                android:id="@+id/tbl_row_real_time_logs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/default_padding_small"
+                android:layout_marginTop="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="start|center"
+                    android:text="@string/Realtime"
+                    android:textSize="16sp"
+                    android:textColor="#283747"/>
+
+                <androidx.appcompat.widget.AppCompatSpinner
+                    android:id="@+id/spinner_real_time_logs"
+                    style="@style/style_default_spinner"
+                    android:layout_margin="0dp"
+                    android:layout_weight="2"
+                    />
+
+            </TableRow>
+
+
+
+
+      <!--  <RelativeLayout
+            android:id="@+id/ngeerror_relative_id"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="5dp"
+            android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/ngeerror_textview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:text="@string/NGEErrorlogs"
+                    android:textSize="16sp"
+                    android:layout_centerInParent="true"
+                    android:layout_alignParentStart="true"
+                    android:textColor="#283747"
+                    />
+                <CheckBox
+                    android:id="@+id/ngeerror_checkBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="10dp"
+
+                    />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/ngeeventlog_relative_id"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="5dp"
+            android:layout_weight="1">
+            <TextView
+                    android:id="@+id/ngeeventlog_textview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:text="@string/NGEEventlogs"
+                    android:textSize="16sp"
+                    android:layout_centerInParent="true"
+                    android:layout_alignParentStart="true"
+                    android:textColor="#283747"
+                    />
+                <CheckBox
+                    android:id="@+id/ngeeventlog_checkBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="10dp"
+                    />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/ngepacketlogging_relative_id"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="5dp"
+            android:layout_weight="1"
+            >
+
+                <TextView
+                    android:id="@+id/ngepacketlogging_textview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:text="@string/NGEPacketlogs"
+                    android:layout_centerInParent="true"
+                    android:layout_alignParentStart="true"
+                    android:textSize="16sp"
+                    android:textColor="#283747"
+                    />
+                <CheckBox
+                    android:id="@+id/ngepacketlogging_checkBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="10dp"
+                    />
+        </RelativeLayout>-->
+
+            <Button
+                android:id="@+id/retrievelogbutton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="20dp"
+                android:layout_weight="1"
+                android:text="@string/RetrieveInternalLogs"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                />
+
+            <TextView
+            android:id="@+id/export_log_heading_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Export_Logs"
+            android:textSize="18sp"
+            android:textColor="#283747"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"
+            android:visibility="visible" />
+
+        <TextView
+            android:id="@+id/export_logs_path_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textColor="#283747"
+            android:inputType="textPersonName"
+            android:text="/sdcard/RfidLog.txt"
+            android:layout_marginTop="10dp"
+            android:maxLines="3"
+            android:singleLine="false"
+            android:scrollHorizontally="false"
+            android:breakStrategy="simple"
+            android:visibility="visible"
+            />
+
+            <Button
+                android:id="@+id/export_button"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="20dp"
+                android:layout_weight="1"
+                android:text="@string/export"
+                android:textStyle="bold"
+                android:textSize="13sp"
+                android:visibility="visible"/>
+        </LinearLayout>
+
+
+        <EditText
+            android:id="@+id/logcats_edittext"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            />
+    </LinearLayout>
+
+</ScrollView>

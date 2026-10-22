@@ -1,0 +1,111 @@
+package com.zebra.demo.scanner.activities;
+
+import android.content.Context;
+import android.content.pm.ActivityInfo;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.res.Configuration;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
+
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
+import com.zebra.demo.BuildConfig;
+import com.zebra.demo.R;
+import com.zebra.demo.application.Application;
+import com.zebra.demo.rfidreader.rfid.RFIDController;
+import com.zebra.demo.scanner.helpers.Foreground;
+import com.zebra.rfid.api3.ReaderDevice;
+
+public class NavigationHelpActivity extends AppCompatActivity {
+    private static final String TAG = "NavigationHelpActivity";
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.app_bar_activity_help);
+        Configuration configuration = getResources().getConfiguration();
+        if(configuration.orientation == Configuration.ORIENTATION_LANDSCAPE){
+            if(configuration.smallestScreenWidthDp<Application.minScreenWidth){
+                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+            }
+        }else{
+            if(configuration.screenWidthDp<Application.minScreenWidth){
+                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+            }
+        }
+
+
+        Toolbar subActionBar = (Toolbar) findViewById(R.id.sub_actionbar);
+        setSupportActionBar(subActionBar);
+        ActionBar actionBar = getSupportActionBar();
+
+        if(actionBar!=null){
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+            getSupportActionBar().setTitle("Help");
+        }
+
+        TextView firmwareHelpItem = findViewById(R.id.nav_help_instruction_item4);
+        ReaderDevice connected = RFIDController.mConnectedDevice;
+        String model = null;
+        String modelName = null;
+        if (connected != null) {
+            modelName = connected.getName();
+            model = connected.getDeviceCapability(modelName);
+        }
+        boolean isQc = "QC".equalsIgnoreCase(model);
+        firmwareHelpItem.setVisibility(isQc ?  View.GONE : View.VISIBLE);
+        PackageInfo pInfo = null;
+        try {
+            pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
+        } catch (PackageManager.NameNotFoundException e) {
+            if( e!= null && e.getStackTrace().length>0){ Log.e(TAG, e.getStackTrace()[0].toString()); }
+        }
+        String version;
+        if(pInfo != null) {
+            version = BuildConfig.VERSION_NAME;
+            ((TextView) findViewById(R.id.about)).setText(getResources().getString(R.string.app_name)+" Application v"+version+"\n\n"+
+                    "SDK version "+ com.zebra.rfid.api3.BuildConfig.VERSION_NAME +"\n\n"
+                    +"\u00a9 2026 Zebra Technologies Corp. and/or its affiliates.  All rights reserved.");
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.no_items, menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (isInBackgroundMode(getApplicationContext())) {
+            finish();
+        }
+    }
+    public boolean isInBackgroundMode(final Context context) {
+        return Foreground.get().isBackground();
+    }
+}

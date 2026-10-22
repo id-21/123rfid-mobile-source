@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    style="@style/base_layout_style"
+    android:orientation="vertical"
+    tools:context=".rfidreader.settings.InventoryProtocolFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/inventoryProtocolLabel"
+            style="@style/style_normal_font"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:text="@string/inventory_protocol_text" />
+
+        <RadioGroup
+            android:id="@+id/inventoryProtocolRadioGroup"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="8dp">
+
+            <RadioButton
+                android:id="@+id/rbProtocolGen2"
+                style="@style/style_normal_font"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Gen2" />
+
+            <RadioButton
+                android:id="@+id/rbProtocolGen2X"
+                style="@style/style_normal_font"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Gen2X" />
+
+            <RadioButton
+                android:id="@+id/rbProtocolHybrid"
+                style="@style/style_normal_font"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hybrid" />
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/tvNotSupported"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Inventory Protocol is not supported on this device."
+            android:textSize="16sp"
+            android:gravity="center"
+            android:padding="24dp"
+            android:visibility="gone" />
+
+
+    </LinearLayout>
+</FrameLayout>
