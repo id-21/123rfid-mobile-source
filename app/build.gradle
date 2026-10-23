@@ -1,71 +1,41 @@
 apply plugin: 'com.android.application'
-apply plugin: 'org.sonarqube'
 
 android {
-    sonarqube{
-        properties{
-            property"sonar.projectName","123RFID_mobile_proj"
-            property"sonar.projectKey","123RFID_mobile_proj"
-            property"sonar.host.url","https://sonar.zebra.com"
-
-            property"sonar.language","java"
-            property"sonar.projectBaseDir","c:/myzebra/myprojects/myNGSled/myngsledsdkapp/rfid-integ-main/rfid_android_sdk_app"
-            property"sonar.sources","RFID/API/DemoApps/Android/RFIDReaderX_with_API/app/src/main/java"
-            property"sonar.login","REDACTED"
-        }
-    }
-
-    signingConfigs {
-        config {
-            storeFile file('../RFIDreaderX_KEYSTORE.jks')
-            keyAlias "RFID_READER_X"
-            storePassword System.getenv("KEY_STORE_PWD")
-            keyPassword System.getenv("KEY_PWD")
-        }
-    }
     compileSdk = 36
+    namespace 'com.zebra.demo'
 
     defaultConfig {
-        applicationId 'com.zebra.rfidreaderAPI.demo'
+        // Different from Zebra's id so it installs next to the Play Store 123RFID app
+        applicationId 'com.dagawallpapers.fulfilment'
         minSdkVersion 29
         targetSdkVersion 36
-        versionCode System.getenv("VERSION_CODE") ? System.getenv("VERSION_CODE").toInteger() : 246
-        versionName System.getenv("VERSION_NAME") ? System.getenv("VERSION_NAME").toString() : "2.0.5.246"
+        versionCode System.getenv("VERSION_CODE") ? System.getenv("VERSION_CODE").toInteger() : 1
+        versionName System.getenv("VERSION_NAME") ? System.getenv("VERSION_NAME").toString() : "0.1.0"
         vectorDrawables.useSupportLibrary = true
-        signingConfig signingConfigs.config
     }
+
+    buildFeatures {
+        // Zebra's code references BuildConfig.DEBUG
+        buildConfig = true
+    }
+
     buildTypes {
         release {
-
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.config
-            android.applicationVariants.all { variant ->
-                variant.outputs.all {
-                    outputFileName = "123_RFID_Mobile-" + defaultConfig.versionName + ".apk"
-                }
-            }
+            // Add your own signingConfig here when you publish a release build
         }
-
         debug {
-
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.config
-            android.applicationVariants.all { variant ->
-                variant.outputs.all {
-                    outputFileName = "123_RFID_Mobile-" + defaultConfig.versionName + ".apk"
-                }
-            }
+            // debug builds are signed automatically with Android Studio's debug key
         }
     }
+
     compileOptions {
         sourceCompatibility = 1.8
         targetCompatibility = 1.8
     }
-    namespace 'com.zebra.demo'
-
 }
-dependencies {
 
+dependencies {
     implementation 'androidx.appcompat:appcompat:1.7.1'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'com.google.android.material:material:1.13.0'
@@ -86,4 +56,6 @@ dependencies {
     implementation 'net.lingala.zip4j:zip4j:2.11.6'
     implementation 'com.google.guava:guava:33.3.0-android'
     implementation fileTree(dir: 'libs', include: ['*.aar', '*.jar'], exclude: [])
+
+    testImplementation 'junit:junit:4.13.2'
 }

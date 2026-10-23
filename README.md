@@ -1,11 +1,13 @@
-# 123RFID Mobile — source (v2.0.5.297)
+# Daga RFID order fulfilment
 
-Zebra's 123RFID Mobile Android demo app (RFID API3 SDK reference), kept here as a private working copy.
+Zebra's 123RFID Mobile demo app (v2.0.5.297, RFID API3 SDK) plus an order fulfilment flow, kept as a private working copy.
 
-- Package: `com.zebra.rfidreaderAPI.demo`, minSdk 29, compileSdk 36
-- Contains only the `app/` module (source, resources, and `app/libs/rfidapi3lib-2.0.5.297.aar`)
-- The compiled APK and signing keystore are not included
-- The zip had no root `settings.gradle` / `build.gradle`; add them (or import `app/` into a new Android Studio project) to build
-- `sonar.login` token in `app/build.gradle` was redacted
+- **Order flow** (new): `app/src/main/java/com/zebra/demo/order/`. Fetch orders, claim, pick by EPC, submit, offline outbox.
+- **Mac setup and test steps**: [docs/MAC_SETUP.md](docs/MAC_SETUP.md)
+- **Backend contract**: [docs/API_CONTRACT.md](docs/API_CONTRACT.md); a runnable mock is in `tools/mock-server/`
+- **How the Zebra code works and where the reader hooks in**: [docs/ORDER_INTEGRATION_PLAN.md](docs/ORDER_INTEGRATION_PLAN.md)
 
-Provided by Zebra under its license terms; keep this repo private.
+Notes
+- Package: `com.dagawallpapers.fulfilment`, minSdk 29, compileSdk 36. SDK library: `app/libs/rfidapi3lib-2.0.5.297.aar`.
+- Zebra's APK, signing keystore and SonarQube token are not included (the token was redacted).
+- Zebra's code is under Zebra's licence terms. Keep this repo private.

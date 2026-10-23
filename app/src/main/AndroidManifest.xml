@@ -28,7 +28,7 @@
 
     <uses-permission android:name="android.Manifest.permission.NETWORK_SETTINGS"/>
     <uses-permission android:name="android.permission.NFC" />
-    <uses-feature android:name="android.hardware.nfc" android:required="true" />
+    <uses-feature android:name="android.hardware.nfc" android:required="false" />
     <uses-feature android:name="android.hardware.camera" />
     <uses-permission android:name="android.permission.CAMERA" />
 
@@ -36,6 +36,7 @@
     <application
         android:name=".application.Application"
         android:allowBackup="false"
+        android:usesCleartextTraffic="true"
         android:enableOnBackInvokedCallback="false"
         android:appComponentFactory="androidx.core.app.CoreComponentFactory"
         android:icon="@mipmap/ic_launcher"
@@ -48,6 +49,25 @@
 
         <uses-library android:name = "com.qti.qrs.qc_sdk"
             android:required = "false"/>
+
+        <!-- Order fulfilment (Daga) -->
+        <activity
+            android:name=".order.OrderListActivity"
+            android:label="Daga Orders"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Material.Light.DarkActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".order.OrderFulfillmentActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize"
+            android:theme="@android:style/Theme.Material.Light.DarkActionBar" />
         <activity
             android:name=".ManageDeviceActivity"
             android:screenOrientation="portrait" />
